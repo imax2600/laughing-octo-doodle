@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         go 'go'
-        hudson.plugins.sonar.SonarRunnerInstallation 'sonar'
+        sonarqube 'sonar'
     }
     stages {
         stage('Build') {
