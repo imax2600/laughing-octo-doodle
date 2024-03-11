@@ -1,12 +1,9 @@
 pipeline {
-    agent {
-        docker {
-            image 'bitnami/golang:1.22.1'
-        }
-    }
+    agent any
     stages {
         stage('Build') {
             steps {
+                sh 'docker --version'
                 echo 'Building...'
             }
         }
