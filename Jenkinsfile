@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         go 'go'
+        sonarqubescanner 'sonar'
     }
     stages {
         stage('Build') {
