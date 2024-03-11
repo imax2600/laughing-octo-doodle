@@ -6,8 +6,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'go version'
-                echo 'Building...'
+              withSonarQubeEnv('sonarQ', envOnly: true) {
+                sh 'sonar-scanner'
+              }
             }
         }
         stage('Test') {
