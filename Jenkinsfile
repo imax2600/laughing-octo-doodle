@@ -4,7 +4,7 @@ pipeline {
         go 'go'
     }
     environment {
-        SCANNER_HOME = scannerHome
+        SCANNER_HOME = "${scannerHome}"
     }
     
     stages {
