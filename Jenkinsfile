@@ -2,21 +2,24 @@ pipeline {
     agent any
     tools {
         go 'go'
-    }
-    environment {
-        SCANNER_HOME = "${scannerHome}"
-    }
-    
+    }   
     stages {
-        stage('Build') {
+         stage('Setup') {
             steps {
-              script {
+                script {
                     def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                     echo "Sonar Scanner Home: ${scannerHome}"
                 }
-              withSonarQubeEnv('sonarQ') {
-                sh 'sonar-scanner'
-              }
+            }
+        }
+        stage('Build') {
+            environment {
+                SCANNER_HOME = "${scannerHome}"
+            }
+            steps {
+                withSonarQubeEnv('sonarQ') {
+                    sh 'sonar-scanner'
+                }
             }
         }
         stage('Test') {
