@@ -1,6 +1,9 @@
 pipeline {
-    agent any
-    image: bitnami/golang:1.22.1
+    agent {
+        docker {
+            image 'bitnami/golang:1.22.1'
+        }
+    }
     stages {
         stage('Build') {
             steps {
