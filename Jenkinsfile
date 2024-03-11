@@ -2,11 +2,11 @@ pipeline {
     agent any
     tools {
         go 'go'
-        sonarqube 'sonar'
     }
     stages {
         stage('Build') {
             steps {
+              def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
               withSonarQubeEnv('sonarQ') {
                 sh 'sonar-scanner'
               }
