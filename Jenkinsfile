@@ -15,7 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Build your Go project
-                sh 'go build -o MyGo ./...'
+                sh 'go build ./...'
             }
         }
         stage('Build2') {
