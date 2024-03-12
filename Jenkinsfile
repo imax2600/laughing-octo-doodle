@@ -13,8 +13,8 @@ pipeline {
                     // sh 'usermod -aG root jenkins'
                     sh 'ls -la /var/run/'
                     sh 'whoami'
-                    sh 'ls -la /var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker/bin/'
-                   sh '/var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker build -t test .'
+                    sh 'ls -la /var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker/bin/docker'
+                   sh '/var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker/bin/docker build -t test .'
                 }
             }
         }
