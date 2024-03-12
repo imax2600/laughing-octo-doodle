@@ -8,7 +8,7 @@ pipeline {
          stage('Setup') {
             steps {
                 script {
-                   sh '/var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker ps'
+                   sh 'sudo /var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker ps'
                 }
             }
         }
