@@ -1,6 +1,10 @@
 pipeline {
-    agent { docker{ image 'alpine:latest' } 
-          }
+    agent {
+        docker {
+            label 'Docker' // Specify the label of the Docker cloud you configured
+            image 'alpine:latest' // Specify the Docker image to use for the Jenkins build agent
+        }
+    }
     tools {
         go 'go'
         dockerTool 'docker'
