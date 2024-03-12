@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         go 'go'
+        docker 'docker'
     }   
     stages {
          stage('Setup') {
