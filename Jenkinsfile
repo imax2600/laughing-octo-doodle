@@ -2,7 +2,6 @@ pipeline {
     agent any
     tools {
         go 'go'
-        'hudson.plugins.sonar.SonarRunnerInstallation' 'sonar'
     }   
     stages {
         //  stage('Setup') {
@@ -14,6 +13,12 @@ pipeline {
         //     }
         // }
         stage('Build') {
+            steps {
+                // Build your Go project
+                sh 'go build ./...'
+            }
+        }
+        stage('Build2') {
             // environment {
             //     SCANNER_HOME = "${scannerHome}"
             // }
