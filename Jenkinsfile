@@ -11,7 +11,7 @@ pipeline {
                    sh 'docker ps'
                 }
             }
-        // }
+        }
         stage('Build') {
             steps {
                 // Build your Go project
