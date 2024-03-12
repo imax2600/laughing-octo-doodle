@@ -11,6 +11,7 @@ pipeline {
                     // sh 'newgrp docker '
                     // sh 'usermod -aG docker jenkins'
                     // sh 'usermod -aG root jenkins'
+                    sh 'whoami'
                     sh 'ls -la /var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/'
                    sh '/var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker build -t test .'
                 }
