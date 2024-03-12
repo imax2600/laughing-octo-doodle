@@ -24,8 +24,8 @@ pipeline {
             // }
             steps {
                 withSonarQubeEnv(installationName: 'sonar') {
-                    //sh '/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar/bin/sonar-scanner'
-                    sh 'sonar-scanner'
+                    sh '/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar/bin/sonar-scanner'
+                    //sh 'sonar-scanner'
                 }
             }
         }
