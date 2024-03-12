@@ -8,14 +8,7 @@ pipeline {
          stage('Setup') {
             steps {
                 script {
-                    // sh 'newgrp docker '
-                    // sh 'usermod -aG docker jenkins'
-                    // sh 'usermod -aG root jenkins'
-                    sh 'ls -la /var/run/'
-                    sh 'whoami'
-                    sh 'ls -la /var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker/bin/'
-                   sh '/var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker/bin/docker ps'
-                    sh 'docker ps'
+                    def myEnv = docker.build 'my-environment:snapshot'
                 }
             }
         }
