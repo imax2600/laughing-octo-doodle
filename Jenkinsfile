@@ -4,18 +4,18 @@ pipeline {
         go 'go'
     }   
     stages {
-         stage('Setup') {
-            steps {
-                script {
-                    def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    echo "Sonar Scanner Home: ${scannerHome}"
-                }
-            }
-        }
+        //  stage('Setup') {
+        //     steps {
+        //         script {
+        //             def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        //             echo "Sonar Scanner Home: ${scannerHome}"
+        //         }
+        //     }
+        // }
         stage('Build') {
-            environment {
-                SCANNER_HOME = "${scannerHome}"
-            }
+            // environment {
+            //     SCANNER_HOME = "${scannerHome}"
+            // }
             steps {
                 withSonarQubeEnv('sonarQ') {
                     sh 'sonar-scanner'
