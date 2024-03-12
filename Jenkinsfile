@@ -4,13 +4,12 @@ pipeline {
         go 'go'
     }   
     stages {
-        //  stage('Setup') {
-        //     steps {
-        //         script {
-        //             def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-        //             echo "Sonar Scanner Home: ${scannerHome}"
-        //         }
-        //     }
+         stage('Setup') {
+            steps {
+                script {
+                   sh 'docker ps'
+                }
+            }
         // }
         stage('Build') {
             steps {
