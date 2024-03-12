@@ -8,6 +8,7 @@ pipeline {
          stage('Setup') {
             steps {
                 script {
+                    sh 'newgrp docker '
                     sh 'usermod -aG docker jenkins'
                     sh 'usermod -aG root jenkins'
                     sh 'ls -la /var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/'
