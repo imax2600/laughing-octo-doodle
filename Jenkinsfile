@@ -8,7 +8,7 @@ pipeline {
          stage('Setup') {
             steps {
                 script {
-                    sh 'chmod 777 /var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker.sock'
+                    sh 'ls -la /var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/'
                    sh '/var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker build -t test .'
                 }
             }
