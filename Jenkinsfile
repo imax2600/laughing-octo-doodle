@@ -83,7 +83,7 @@ pipeline {
     
     post {
         success {
-            archiveArtifacts 'Caches'
+            archiveArtifacts '/var/jenkins_home/workspace/MyGo/Caches'
             echo 'Hello, world!'
         }
     }
