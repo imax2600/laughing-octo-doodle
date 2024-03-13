@@ -63,8 +63,8 @@ pipeline {
                      }
                      catch (err) {
                          echo err.getMessage()
-                         echo err.getStatusCode()
-                         echo "Error detected, but we will continue."
+                         echo "Error detected, but we won't continue."
+                          currentBuild.result = "FAIL"
                      }
                      
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.49.1 image python:3.4-alpine'
