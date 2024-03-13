@@ -38,18 +38,18 @@ pipeline {
         stage('trivy') {
             steps {
                 script {
-                    def dockerImagesOutput = sh(script: 'docker images --format "{{.Repository}}:{{.Tag}}"', returnStdout: true).trim()
+                    // def dockerImagesOutput = sh(script: 'docker images --format "{{.Repository}}:{{.Tag}}"', returnStdout: true).trim()
 
-                    // Split the output into lines
-                    def images = dockerImagesOutput.split('\n')
+                    // // Split the output into lines
+                    // def images = dockerImagesOutput.split('\n')
 
-                    // Search for the image name containing "mygo"
-                    def mygoImage = images.find { it.contains('mygo') }
+                    // // Search for the image name containing "mygo"
+                    // def mygoImage = images.find { it.contains('mygo') }
             
-                    // Print the image if found
-                    echo "Found image: $mygoImage"
-                    // sh 'docker inspect -f . mygo:latest'
-                    def image = docker.image('mygo:latest')
+                    // // Print the image if found
+                    // echo "Found image: $mygoImage"
+                    // // sh 'docker inspect -f . mygo:latest'
+                    // def image = docker.image('mygo:latest')
 
                     // docker.image('maven:3.3.3-jdk-8').inside {
                     //       git '…your-sources…'
@@ -59,7 +59,7 @@ pipeline {
                     //     sh 'ls -la'
                     // }
                      try {
-                         sh 'docker run aquasec/trivy image python:3.4-alpine --exit-code 1 --severity HIGH --no-progress'
+                         sh 'docker run aquasec/trivy image python:3.4-alpine --exit-code 1 --no-progress'
                      }
                      catch (err) {
                          echo err.getMessage()
