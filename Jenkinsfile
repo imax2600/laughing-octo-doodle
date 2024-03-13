@@ -64,7 +64,7 @@ pipeline {
                      catch (err) {
                          echo err.getMessage()
                          currentBuild.result = "FAIL"
-                         error 'You've failed the Trivi'
+                         error 'You\'ve failed the Trivi'
                      }
                      
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.49.1 image python:3.4-alpine'
