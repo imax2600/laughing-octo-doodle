@@ -3,7 +3,7 @@ pipeline {
     tools {
         go 'go'
         dockerTool 'docker'
-        sonar-scanner 'sonar'
+        'hudson.plugins.sonar.SonarRunnerInstallation' 'sonar'
     }   
     stages {
          stage('Setup') {
