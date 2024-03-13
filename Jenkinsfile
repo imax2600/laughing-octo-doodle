@@ -32,7 +32,7 @@ pipeline {
         }
         stage('build image') {
             steps {
-                sh 'docker build -t mygo:latest -f Dockerfile-main'
+                sh 'docker build -t mygo:latest -f Dockerfile-main .'
             }
         }
         stage('trivy') {
