@@ -13,13 +13,13 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
-            steps {
-                // Build your Go project
-                sh 'go build ./...'
-            }
-        }
-        stage('Build2') {
+        // stage('Build') {
+        //     steps {
+        //         // Build your Go project
+        //         sh 'go build ./...'
+        //     }
+        // }
+        stage('sonar scan') {
             // environment {
             //     SCANNER_HOME = "${scannerHome}"
             // }
@@ -30,7 +30,12 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
+        stage('build image') {
+            steps {
+                echo 'Testing...'
+            }
+        }
+        stage('trivy') {
             steps {
                 echo 'Testing...'
             }
