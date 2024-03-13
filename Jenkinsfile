@@ -13,12 +13,12 @@ pipeline {
                 }
             }
         }
-        // stage('Build') {
-        //     steps {
-        //         // Build your Go project
-        //         sh 'go build ./...'
-        //     }
-        // }
+        stage('Build') {
+            steps {
+                // Build your Go project
+                sh 'go build -o main ./...'
+            }
+        }
         stage('sonar scan') {
             // environment {
             //     SCANNER_HOME = "${scannerHome}"
@@ -32,7 +32,7 @@ pipeline {
         }
         stage('build image') {
             steps {
-                echo 'Testing...'
+                echo 'docker build -t mygo .'
             }
         }
         stage('trivy') {
