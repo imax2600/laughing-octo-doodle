@@ -38,7 +38,16 @@ pipeline {
         stage('trivy') {
             steps {
                 script {
-                    sh 'docker images | grep mygo'
+                    def dockerImagesOutput = sh(script: 'docker images --format "{{.Repository}}:{{.Tag}}"', returnStdout: true).trim()
+
+                    // Split the output into lines
+                    def images = dockerImagesOutput.split('\n')
+
+                    // Search for the image name containing "mygo"
+                    def mygoImage = images.find { it.contains('mygo') }
+
+                    // Print the image if found
+                    echo "Found image: $mygoImage"
                     def image = docker.image('mygo:latest')
                     image.inside {
                         
