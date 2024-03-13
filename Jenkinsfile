@@ -39,6 +39,9 @@ pipeline {
             steps {
                 script {
                     def image = docker.image('mygo:latest')
+                    image.inside {
+                        
+                    }
                     // sh 'docker run aquasec/trivy image python:3.4-alpine'
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.49.1 image python:3.4-alpine'
                 }
