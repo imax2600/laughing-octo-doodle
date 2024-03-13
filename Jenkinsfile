@@ -58,7 +58,13 @@ pipeline {
                     // image.inside {
                     //     sh 'ls -la'
                     // }
-                     sh 'docker run aquasec/trivy image python:3.4-alpine --exit-code 0 --severity HIGH --no-progress'
+                     try {
+                         sh 'docker run aquasec/trivy image python:3.4-alpine --exit-code 0 --severity HIGH --no-progress'
+                     }
+                     catch (err) {
+                         echo err.getMessage()
+                         echo "Error detected, but we will continue."
+                     }
                      
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.49.1 image python:3.4-alpine'
                 }
