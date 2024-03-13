@@ -50,6 +50,11 @@ pipeline {
                     echo "Found image: $mygoImage"
                     // sh 'docker inspect -f . mygo:latest'
                     def image = docker.image('mygo:latest')
+
+                    docker.image('maven:3.3.3-jdk-8').inside {
+                          git '…your-sources…'
+                          sh 'mvn -B clean install'
+                    }
                     // image.inside {
                     //     sh 'ls -la'
                     // }
