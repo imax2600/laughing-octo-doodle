@@ -60,7 +60,7 @@ pipeline {
                     // }
                      try {
                          sh 'docker build -t mygo:latest -f Dockerfile-main .'
-                         sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy -v $HOME/Library/Caches:/root/.cache image mygo:latest --exit-code 1 --no-progress --format table'
+                         sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 1 --no-progress --format table'
                      }
                      catch (err) {
                          echo err.getMessage()
