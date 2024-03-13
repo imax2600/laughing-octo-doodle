@@ -51,13 +51,13 @@ pipeline {
                     // sh 'docker inspect -f . mygo:latest'
                     def image = docker.image('mygo:latest')
 
-                    docker.image('maven:3.3.3-jdk-8').inside {
-                          git '…your-sources…'
-                          sh 'mvn -B clean install'
-                    }
-                    // image.inside {
-                    //     sh 'ls -la'
+                    // docker.image('maven:3.3.3-jdk-8').inside {
+                    //       git '…your-sources…'
+                    //       sh 'mvn -B clean install'
                     // }
+                    image.inside {
+                        sh 'ls -la'
+                    }
                     // sh 'docker run aquasec/trivy image python:3.4-alpine'
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.49.1 image python:3.4-alpine'
                 }
