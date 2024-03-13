@@ -9,7 +9,7 @@ pipeline {
          stage('Setup') {
             steps {
                 script {
-                    echo $HOME
+                    sh 'pwd'
                     sh 'docker ps'
                 }
             }
