@@ -83,7 +83,7 @@ pipeline {
     
     post {
         success {
-            archiveArtifacts '$HOME/Library/Caches'
+            archiveArtifacts 'Caches'
             echo 'Hello, world!'
         }
     }
