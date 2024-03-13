@@ -48,8 +48,8 @@ pipeline {
             
                     // Print the image if found
                     echo "Found image: $mygoImage"
-                    sh 'docker inspect -f . mygo:latest'
-                    // def image = docker.image('mygo:latest')
+                    // sh 'docker inspect -f . mygo:latest'
+                    def image = docker.image('mygo:latest')
                     // image.inside {
                     //     sh 'ls -la'
                     // }
