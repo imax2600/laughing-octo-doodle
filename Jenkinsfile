@@ -32,12 +32,15 @@ pipeline {
         }
         stage('build image') {
             steps {
-                echo 'docker build -t mygo .'
+                echo 'docker build -t mygo Dockerfile-main'
             }
         }
         stage('trivy') {
             steps {
-                echo 'Testing...'
+                def trivy = docker.image('aquasec/trivy')
+                trivy.inside {
+                    sh 'ls -la'
+                }
             }
         }
         stage('Deploy') {
