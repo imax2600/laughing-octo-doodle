@@ -38,7 +38,7 @@ pipeline {
         stage('trivy') {
             steps {
                 script {
-                    sh 'docker images | grep 'mygo''
+                    sh 'docker images | grep mygo'
                     def image = docker.image('mygo:latest')
                     image.inside {
                         
