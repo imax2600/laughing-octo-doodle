@@ -1,5 +1,5 @@
 # Use a base image
-FROM ubuntu:latest
+FROM ubuntu:rolling
 
 # Set the working directory inside the container
 WORKDIR /app
