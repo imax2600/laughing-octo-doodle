@@ -60,8 +60,9 @@ pipeline {
                     //     sh 'ls -la'
                     // }
                      try {
+                         sh 'mkdir Caches'
                          sh 'docker build -t mygo:latest -f Dockerfile-main .'
-                         sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 1 --no-progress --format table'
+                         sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v Caches/:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 1 --no-progress --format table'
                      }
                      catch (err) {
                          echo err.getMessage()
