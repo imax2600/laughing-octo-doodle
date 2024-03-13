@@ -60,7 +60,7 @@ pipeline {
                     //     sh 'ls -la'
                     // }
                      try {
-                         sh 'mkdir Caches'
+                         sh 'ls -la'
                          sh 'docker build -t mygo:latest -f Dockerfile-main .'
                          sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/workspace/MyGo/Caches:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 1 --no-progress --format table'
                      }
