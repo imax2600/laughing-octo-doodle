@@ -30,11 +30,11 @@ pipeline {
                 }
             }
         }
-        stage('build image') {
-            steps {
-                sh 'docker build -t mygo:latest -f Dockerfile-main .'
-            }
-        }
+        // stage('build image') {
+        //     steps {
+        //         sh 'docker build -t mygo:latest -f Dockerfile-main .'
+        //     }
+        // }
         stage('trivy') {
             steps {
                 script {
@@ -59,6 +59,7 @@ pipeline {
                     //     sh 'ls -la'
                     // }
                      try {
+                         sh 'docker build -t mygo:latest -f Dockerfile-main .'
                          sh 'docker run aquasec/trivy image mygo:latest --exit-code 1 --no-progress --format table'
                      }
                      catch (err) {
