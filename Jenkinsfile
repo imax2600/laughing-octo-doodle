@@ -59,7 +59,7 @@ pipeline {
                     //     sh 'ls -la'
                     // }
                      try {
-                         sh 'docker run aquasec/trivy image python:3.4-alpine --exit-code 1 --no-progress'
+                         sh 'docker run aquasec/trivy image python:3.4-alpine --exit-code 1 --no-progress --format json'
                      }
                      catch (err) {
                          echo err.getMessage()
