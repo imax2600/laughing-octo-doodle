@@ -5,7 +5,7 @@ FROM ubuntu:rolling
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY main /app/main
+COPY . /app
 
 # Run a command when the container starts
 CMD ["bash"]
