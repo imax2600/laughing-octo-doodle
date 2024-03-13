@@ -63,7 +63,7 @@ pipeline {
                      }
                      catch (err) {
                          echo err.getMessage()
-                         echo err.getStatus()
+                         echo err.getAt()
                          echo err.getStatusCode()
                          echo "Error detected, but we will continue."
                      }
