@@ -68,6 +68,7 @@ pipeline {
                          echo err.getMessage()
                          // currentBuild.result = "FAIL"
                          // error 'You\'ve failed the Trivi'
+                         sh 'cat Caches'
                      }
                      
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.49.1 image python:3.4-alpine'
@@ -81,10 +82,10 @@ pipeline {
         }
     }
     
-    post {
-        success {
-            archiveArtifacts '/var/jenkins_home/workspace/MyGo/Caches'
-            echo 'Hello, world!'
-        }
-    }
+    // post {
+    //     success {
+    //         archiveArtifacts '/var/jenkins_home/workspace/MyGo/Caches'
+    //         echo 'Hello, world!'
+    //     }
+    // }
 }
