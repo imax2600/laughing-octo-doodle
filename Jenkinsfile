@@ -37,9 +37,11 @@ pipeline {
         }
         stage('trivy') {
             steps {
-                def trivy = docker.image('aquasec/trivy')
-                trivy.inside {
-                    sh 'ls -la'
+                script {
+                    def trivy = docker.image('aquasec/trivy')
+                    trivy.inside {
+                        sh 'ls -la'
+                    }
                 }
             }
         }
