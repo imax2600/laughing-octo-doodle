@@ -32,14 +32,15 @@ pipeline {
         }
         stage('build image') {
             steps {
-                echo 'docker build -t mygo Dockerfile-main'
+                echo 'docker build -t mygo:latest Dockerfile-main'
             }
         }
         stage('trivy') {
             steps {
                 script {
+                    def image = docker.image('mygo:latest')
                     // sh 'docker run aquasec/trivy image python:3.4-alpine'
-                    sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.49.1 image python:3.4-alpine'
+                    // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.49.1 image python:3.4-alpine'
                 }
             }
         }
