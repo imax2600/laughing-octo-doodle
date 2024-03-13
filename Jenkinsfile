@@ -8,10 +8,7 @@ pipeline {
          stage('Setup') {
             steps {
                 script {
-                    def myEnv = docker.build 'my-environment:snapshot'
-                    myEnv.inside {
-                        sh 'ls -la'
-                    }
+                    sh 'docker ps'
                 }
             }
         }
