@@ -49,10 +49,10 @@ pipeline {
                     // Print the image if found
                     echo "Found image: $mygoImage"
                     sh 'docker inspect -f . mygo:latest'
-                    def image = docker.image('mygo:latest')
-                    image.inside {
-                        sh 'ls -la'
-                    }
+                    // def image = docker.image('mygo:latest')
+                    // image.inside {
+                    //     sh 'ls -la'
+                    // }
                     // sh 'docker run aquasec/trivy image python:3.4-alpine'
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.49.1 image python:3.4-alpine'
                 }
