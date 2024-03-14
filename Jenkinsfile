@@ -33,18 +33,6 @@ pipeline {
                 }
             }
         }
-        stage('test docker') {
-            agent {
-                docker { image 'aquasec/trivy'}
-            }
-            environment {
-                PATH = "/var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker/bin:$PATH"
-                DOCKER_SOCKET = '/var/run/docker.sock'
-            }
-            steps {
-                sh 'mvn --version'
-            }
-        }
         stage('trivy') {
             steps {
                 script {
