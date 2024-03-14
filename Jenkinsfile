@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         go 'go'
-        // dockerTool 'docker'
+        dockerTool 'docker'
         'hudson.plugins.sonar.SonarRunnerInstallation' 'sonar'
     }   
     stages {
