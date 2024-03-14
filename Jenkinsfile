@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         go 'go'
-        dockerTool 'docker'
+        // dockerTool 'docker'
         'hudson.plugins.sonar.SonarRunnerInstallation' 'sonar'
     }   
     stages {
@@ -39,6 +39,7 @@ pipeline {
             }
             environment {
                 PATH = "/var/jenkins_home/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool/docker/bin:$PATH"
+                DOCKER_SOCKET = '/var/run/docker.sock'
             }
             steps {
                 sh 'mvn --version'
