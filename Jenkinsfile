@@ -62,13 +62,13 @@ pipeline {
                      try {
                          sh 'ls -la'
                          sh 'docker build -t mygo:latest -f Dockerfile-main .'
-                         sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/workspace/MyGo/Caches/:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 1 --format json --output root/.cache/test.json'
+                         sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/workspace/MyGo/Caches/:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 1 --format json --output /root/.cache/test.json'
                      }
                      catch (err) {
                          echo err.getMessage()
                          // currentBuild.result = "FAIL"
                          // error 'You\'ve failed the Trivi'
-                         sh 'ls -la Caches'
+                         sh 'ls -la /root/Caches'
                          sh 'pwd'
                      }
                      
