@@ -31,7 +31,7 @@ pipeline {
         }
         stage('test docker') {
             agent {
-                docker { image 'maven:3.9.6-amazoncorretto-8-debian-bookworm'}
+                docker { image 'node:16-alpine'}
             }
             steps {
                 sh 'mvn --version'
