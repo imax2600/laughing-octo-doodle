@@ -44,7 +44,7 @@ pipeline {
                          image.inside('--entrypoint \'\' -v /var/run/docker.sock:/var/run/docker.sock') {
                              sh 'ls -la'
                              sh 'trivy --version'
-                             sh 'trivy image python:3.4-alpine --format json --output test.json '
+                             sh 'trivy image mygo:latest --format json --output test.json '
                              sh 'ls -la'
                          }
                      }
