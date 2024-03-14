@@ -12,12 +12,12 @@ pipeline {
                 sh 'which docker'
             }
         }
-        stage('Build') {
+        stage('Build app') {
             steps {
                 sh 'go build -o main ./...'
             }
         }
-        stage('sonar scan') {
+        stage('sonar scanner') {
             steps {
                 withSonarQubeEnv(installationName: 'sonar') {
                     sh '/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar/bin/sonar-scanner'
@@ -33,7 +33,7 @@ pipeline {
                 }
             }
         }
-        stage('trivy') {
+        stage('trivy scan') {
             steps {
                 script {
                      try {
@@ -61,6 +61,12 @@ pipeline {
             }
         }
         stage('Deploy') {
+            steps {
+                sh 'ls -la'
+                echo 'Deploying...'
+            }
+        }
+        stage('zap scan') {
             steps {
                 sh 'ls -la'
                 echo 'Deploying...'
