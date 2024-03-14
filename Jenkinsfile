@@ -47,19 +47,15 @@ pipeline {
         }
         stage('trivy') {
             steps {
-                withDockerContainer(image: 'aquasec/trivy:canary', toolName: 'docker') {
-                        echo 'I am inside docker'
-                        sh 'ls'
-                }
                 script {
                      try {
                          sh 'ls -la'
                          sh 'docker build -t mygo:latest -f Dockerfile-main .'
                          // sh 'docker run -u root -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/workspace/MyGo/Caches/:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 0 --format json --output test.json'
-                         def image = docker.image('docker')
-                         // image.withTool('docker').inside('-v /var/run/docker.sock:/var/run/docker.sock --privileged') {
-                         //     sh 'ls'
-                         // }
+                         def image = docker.image('bitnami/trivy')
+                         image.inside {
+                             sh 'ls'
+                         }
                      }
                      catch (err) {
                          echo err.getMessage()
