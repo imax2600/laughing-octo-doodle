@@ -68,8 +68,12 @@ pipeline {
         }
         stage('zap scan') {
             steps {
-                sh 'ls -la'
-                echo 'Deploying...'
+                script {
+                    def zap = docker.image('owasp/zap2docker-stable:latest')
+                    zap.inside('--entrypoint '\'\ ') {
+                        // sh 'zap-full-scan.py -t "https://" -r zap-report.html || true'
+                    }
+                }
             }
         }
     }
