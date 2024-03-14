@@ -39,7 +39,7 @@ pipeline {
         stage('trivy') {
             steps {
                 withDockerContainer(image: 'aquasec/trivy:canary', toolName: 'docker') {
-                        echo 'I'm inside docker'
+                        echo 'I am inside docker'
                         sh 'ls'
                 }
                 script {
