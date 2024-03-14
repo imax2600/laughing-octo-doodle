@@ -6,6 +6,12 @@ pipeline {
         'hudson.plugins.sonar.SonarRunnerInstallation' 'sonar'
     }   
     stages {
+        stage('check') {
+            steps {
+                sh 'docker --version'
+                sh 'which docker'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'go build -o main ./...'
