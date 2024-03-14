@@ -42,9 +42,10 @@ pipeline {
                          // sh 'docker run -u root -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/workspace/MyGo/Caches/:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 0 --format json --output test.json'
                          def image = docker.image('aquasec/trivy:latest')
                          image.inside('--entrypoint \'\' -v /var/run/docker.sock:/var/run/docker.sock') {
-                             sh 'docker --version'
+                             //sh 'docker --version'
                              sh 'ls -la'
                              sh 'trivy --version'
+                             sh 'trivy image alpine:latest'
                          }
                      }
                      catch (err) {
