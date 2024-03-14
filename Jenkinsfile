@@ -43,6 +43,7 @@ pipeline {
                          def image = docker.image('docker')
                          image.inside('-v /var/run/docker.sock:/var/run/docker.sock') {
                              sh 'docker ps'
+                             sh 'ls -la'
                          }
                      }
                      catch (err) {
