@@ -10,6 +10,7 @@ pipeline {
             steps {
                 sh 'docker --version'
                 sh 'which docker'
+                echo $PATH
             }
         }
         stage('Build') {
