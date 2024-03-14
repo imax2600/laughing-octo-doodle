@@ -60,6 +60,7 @@ pipeline {
                     //     sh 'ls -la'
                     // }
                      try {
+                         echo $PATH
                          sh 'ls -la'
                          sh 'docker build -t mygo:latest -f Dockerfile-main .'
                          // sh 'docker run -u root -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/workspace/MyGo/Caches/:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 0 --format json --output test.json'
