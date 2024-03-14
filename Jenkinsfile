@@ -33,6 +33,9 @@ pipeline {
             agent {
                 docker { image 'node:16-alpine'}
             }
+            environment {
+                  HOME="."
+            }
             steps {
                 sh 'mvn --version'
             }
