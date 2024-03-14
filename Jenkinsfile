@@ -45,7 +45,7 @@ pipeline {
                              //sh 'docker --version'
                              sh 'ls -la'
                              sh 'trivy --version'
-                             sh 'trivy image alpine:latest'
+                             sh 'trivy image python:3.4-alpine'
                          }
                      }
                      catch (err) {
