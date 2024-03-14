@@ -44,6 +44,7 @@ pipeline {
                          image.inside('-v /var/run/docker.sock:/var/run/docker.sock') {
                              sh 'docker ps'
                              sh 'ls -la'
+                             sh 'trivy --version'
                          }
                      }
                      catch (err) {
