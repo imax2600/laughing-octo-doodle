@@ -27,8 +27,10 @@ pipeline {
         stage('build image') {
             steps {
                 sh 'docker build -t mygo:latest -f Dockerfile-main .'
+                script {
                 def path = env.PATH
                 echo "PATH: ${path}"
+                }
             }
         }
         stage('test docker') {
