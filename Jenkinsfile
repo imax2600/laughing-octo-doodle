@@ -10,7 +10,6 @@ pipeline {
             steps {
                 sh 'docker --version'
                 sh 'which docker'
-                echo $PATH
             }
         }
         stage('Build') {
@@ -28,6 +27,8 @@ pipeline {
         stage('build image') {
             steps {
                 sh 'docker build -t mygo:latest -f Dockerfile-main .'
+                def path = env.PATH
+                echo "PATH: ${path}"
             }
         }
         stage('test docker') {
