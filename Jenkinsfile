@@ -38,7 +38,7 @@ pipeline {
                          def image = docker.image('aquasec/trivy:latest')
                          image.inside("--entrypoint '' -v /var/run/docker.sock:/var/run/docker.sock") {
                              sh 'trivy --version'
-                             sh 'trivy image mygo:latest --format json --output test.json '
+                             sh 'trivy image mygo:latest --exit-code 1 --format json --output test.json '
                          }
                      }
                      catch (err) {
@@ -61,7 +61,7 @@ pipeline {
             steps {
                 script {
                     def zap = docker.image('owasp/zap2docker-stable:latest')
-                    zap.inside('--entrypoint '\'\ ') {
+                    zap.inside('--entrypoint \'\' ') {
                         // sh 'zap-full-scan.py -t "https://" -r zap-report.html || true'
                     }
                 }
