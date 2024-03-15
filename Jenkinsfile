@@ -3,7 +3,7 @@ pipeline {
     tools {
         go 'go'
         // dockerTool 'docker'
-        'hudson.plugins.sonar.SonarRunnerInstallation' 'sonar'
+        // 'hudson.plugins.sonar.SonarRunnerInstallation' 'sonar'
     }   
     stages {
         stage('Build app') {
@@ -14,7 +14,12 @@ pipeline {
         stage('sonar scanner') {
             steps {
                 withSonarQubeEnv(installationName: 'sonar') {
-                    sh '/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar/bin/sonar-scanner'
+                    def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    def scanner = scannerHome.getHome()
+
+                    withSonarQubeEnv('sonar') {
+                        sh "${scanner}/bin/sonar-scanner"
+                    }
                 }
             }
         }
