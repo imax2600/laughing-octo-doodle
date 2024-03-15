@@ -67,7 +67,7 @@ pipeline {
         success {
             archiveArtifacts allowEmptyArchive: true, artifacts: 'trivy-report.json'
             // archiveArtifacts allowEmptyArchive: true, artifacts: 'zap-report.json'
-            echo 'Hello, world!'
+            echo 'Build success!!!'
         }
     }
 }
