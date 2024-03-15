@@ -37,7 +37,7 @@ t-copipeline {
                          def image = docker.image('aquasec/trivy:latest')
                          image.inside("--entrypoint '' -v /var/run/docker.sock:/var/run/docker.sock -u root") {
                              sh 'trivy --version'
-                             sh 'trivy image mygo:latest --format json --output test.json --exit-code 1'
+                             sh 'trivy image mygo:latest --exit-code 1 --format json --output test.json'
                          }
                      }
                      catch (err) {
