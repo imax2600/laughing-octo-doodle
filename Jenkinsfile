@@ -22,7 +22,9 @@ pipeline {
         }
         stage('Build app') {
             steps {
-                echo changedFiles
+                for (elem in changedFiles) {
+                    echo elem
+                }                
             }
         }
     //     stage('Build app') {
