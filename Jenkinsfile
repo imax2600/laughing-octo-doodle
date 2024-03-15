@@ -6,6 +6,18 @@ pipeline {
         // 'hudson.plugins.sonar.SonarRunnerInstallation' 'sonar'
     }   
     stages {
+        stage('check') {
+            steps {
+                changedFiles = []
+                for (changeLogSet in currentBuild.changeSets) {
+                for (entry in changeLogSet.getItems()) { 
+                for (file in entry.getAffectedFiles()) {
+                    echo file.getPath() // add changed file to list
+                }
+                }
+                }
+            }
+        }
         stage('Build app') {
             steps {
                 sh 'go build -o main ./...'
