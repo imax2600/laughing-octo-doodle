@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    def changedFiles = []
     tools {
         go 'go'
         // dockerTool 'docker'
@@ -9,7 +10,6 @@ pipeline {
         stage('check') {
             steps {
                 script {
-                def changedFiles = []
                 for (changeLogSet in currentBuild.changeSets) {
                     for (entry in changeLogSet.getItems()) { 
                         for (file in entry.getAffectedFiles()) {
