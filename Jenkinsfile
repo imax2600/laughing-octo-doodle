@@ -65,8 +65,8 @@ pipeline {
     
     post {
         success {
-            archiveArtifacts 'trivy-report.json'
-            archiveArtifacts 'zap-report.json'
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'trivy-report.json'
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'zap-report.json'
             echo 'Hello, world!'
         }
     }
