@@ -88,5 +88,5 @@ pipeline {
     //         // archiveArtifacts allowEmptyArchive: true, artifacts: 'zap-report.json'
     //         echo 'Build success!!!'
     //     }
-    // }
+    }
 }
