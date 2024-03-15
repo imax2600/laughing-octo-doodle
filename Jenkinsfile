@@ -42,8 +42,7 @@ pipeline {
                      }
                      catch (err) {
                          echo err.getMessage()
-                         sh 'ls -la Caches'
-                         sh 'pwd'
+                         error('Trivy scan has failed')
                      }
                      
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.49.1 image python:3.4-alpine'
