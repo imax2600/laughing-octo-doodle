@@ -33,7 +33,12 @@ pipeline {
             steps {
                 script {
                 for (elem in "Hello,/world") {
-                    echo elem
+                    if (elem == 47) {
+                        echo "test test"
+                    }
+                    else {
+                        echo elem
+                    }
                 }
                 }
             }
