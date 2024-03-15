@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Build app') {
             steps {
-                echo '${changedFiles}'
+                echo changedFiles
             }
         }
     //     stage('Build app') {
