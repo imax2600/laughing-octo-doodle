@@ -31,7 +31,6 @@ pipeline {
         stage('trivy scan') {
             steps {
                 script {
-                     try {
                          // sh 'docker build -t mygo:latest -f Dockerfile-main .'
                          // sh 'docker run -u root -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/workspace/MyGo/Caches/:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 0 --format json --output test.json'
                          def image = docker.image('aquasec/trivy:latest')
@@ -40,13 +39,9 @@ pipeline {
                              def status = sh script : 'trivy image mygo:latest --exit-code 1 --format json --output test.json ', returnStatus: true
                              if (status == 1) {
                                  error('Trivy scan failed')
+                                 return
                              }
-                         }
-                     }
-                     catch (err) {
-                         echo err.getMessage()
-                     }
-                     
+                         }                     
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.49.1 image python:3.4-alpine'
                 }
             }
