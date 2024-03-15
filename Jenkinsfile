@@ -94,3 +94,7 @@ pipeline {
     //     }
     }
 }
+
+def makeList(ArrayList list) {
+    
+}
