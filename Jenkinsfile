@@ -8,11 +8,13 @@ pipeline {
     stages {
         stage('check') {
             steps {
-                changedFiles = []
+                script {
+                def changedFiles = []
                 for (changeLogSet in currentBuild.changeSets) {
                 for (entry in changeLogSet.getItems()) { 
                 for (file in entry.getAffectedFiles()) {
                     echo file.getPath() // add changed file to list
+                }
                 }
                 }
                 }
