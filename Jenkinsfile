@@ -1,6 +1,6 @@
+def changedFiles = []
 pipeline {
     agent any
-    def changedFiles = []
     tools {
         go 'go'
         // dockerTool 'docker'
