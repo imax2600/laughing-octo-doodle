@@ -37,7 +37,7 @@ pipeline {
                          image.inside("--entrypoint '' -v /var/run/docker.sock:/var/run/docker.sock -u root") {
                              sh 'trivy --version'
                              def status = sh script : 'trivy image mygo:latest --format HTML --output trivy-report.html ', returnStatus: true
-                             // sh ''
+                             sh 'ls -l'
                          }                     
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.49.1 image python:3.4-alpine'
                 }
