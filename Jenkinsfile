@@ -36,8 +36,8 @@ pipeline {
                          def image = docker.image('aquasec/trivy:latest')
                          image.inside("--entrypoint '' -v /var/run/docker.sock:/var/run/docker.sock -u root") {
                              sh 'trivy --version'
-                             sh 'trivy image mygo:latest --format cyclonedx -o trivy-report.json '
-                             sh 'trivy sbom trivy-report.json --format template --template "/contrib/html.tpl" -o trivy-report.html --severity MEDIUM,HIGH,CRITICAL '
+                             sh 'trivy image mygo:latest --format template --template "/contrib/html.tpl" -o trivy-report.html '
+                             //sh 'trivy sbom trivy-report.json --format template --template "/contrib/html.tpl" -o trivy-report.html --severity MEDIUM,HIGH,CRITICAL '
                              //sh 'ls -la /usr/local/bin/trivy '
                              //sh 'find / -name html.tpl -type f'
                          }                     
