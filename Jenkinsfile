@@ -61,7 +61,7 @@ pipeline {
             steps {
                 script {
                     def zap = docker.image('owasp/zap2docker-stable:latest')
-                    zap.inside('--entrypoint '\'\ ') {
+                    zap.inside('--entrypoint \'\' ') {
                         // sh 'zap-full-scan.py -t "https://" -r zap-report.html || true'
                     }
                 }
