@@ -38,7 +38,8 @@ pipeline {
                              sh 'trivy --version'
                              def status = sh script : 'trivy image mygo:latest --format cyclonedx -o trivy-report.json ', returnStatus: true
                              sh 'trivy sbom trivy-report.json --format template --template "@contrib/html.tpl" -o trivy-report.html --severity MEDIUM,HIGH,CRITICAL '
-                             sh 'ls -la'
+                             sh 'cd ..'
+                             sh 'find / -name trivy -type f'
                          }                     
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.49.1 image python:3.4-alpine'
                 }
