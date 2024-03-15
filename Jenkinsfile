@@ -19,6 +19,7 @@ pipeline {
 
                     withSonarQubeEnv('sonar') {
                         sh "${scanner}/bin/sonar-scanner"
+                        sh 'ls'
                     }
                 }
             }
