@@ -37,7 +37,7 @@ pipeline {
                          image.inside("--entrypoint '' -v /var/run/docker.sock:/var/run/docker.sock -u root") {
                              sh 'trivy --version'
                              sh 'trivy image mygo:latest --format json -o trivy-report.json '
-                             sh 'trivy sbom trivy-report.json --format template --template "/contrib/html.tpl" -o trivy-report.html --severity MEDIUM,HIGH,CRITICAL '
+                             sh 'trivy sbom trivy-report.json --format template --template "@/contrib/html.tpl" -o trivy-report.html --severity MEDIUM,HIGH,CRITICAL '
                              sh 'ls -la /usr/local/bin/trivy/ '
                              sh 'find / -name html.tpl -type f'
                          }                     
