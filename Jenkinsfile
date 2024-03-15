@@ -29,6 +29,15 @@ pipeline {
                 }
             }
         }
+        stage('Build app') {
+            steps {
+                script {
+                for (elem in "Hello,/world") {
+                    echo elem
+                }
+                }
+            }
+        }
     //     stage('Build app') {
     //         steps {
     //             sh 'go build -o main ./...'
