@@ -38,7 +38,7 @@ pipeline {
                              sh 'trivy --version'
                              def status = sh script : 'trivy image mygo:latest --format template --template "@contrib/html.tpl" -o trivy-report.html ', returnStatus: true
                              sh 'ls -la'
-                             sh "find . -type f -name 'html.tpl' | grep -v '^\\.$'"
+                             sh "find . -type f -name 'html.tpl' -not -path './.'"
                          }                     
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.49.1 image python:3.4-alpine'
                 }
