@@ -73,7 +73,7 @@ pipeline {
             archiveArtifacts 'test.json'
             echo 'Hello, world!'
         }
-        always {
+        cleanup {
             cleanWs()
         }
     }
