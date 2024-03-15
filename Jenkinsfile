@@ -22,9 +22,11 @@ pipeline {
         }
         stage('Build app') {
             steps {
+                script {
                 for (elem in changedFiles) {
                     echo elem
-                }                
+                }
+                }
             }
         }
     //     stage('Build app') {
