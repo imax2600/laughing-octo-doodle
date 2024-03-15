@@ -20,7 +20,7 @@ pipeline {
                 }
             }
         }
-        stage('Build app') {
+        stage('Build apap') {
             steps {
                 script {
                 for (elem in changedFiles) {
