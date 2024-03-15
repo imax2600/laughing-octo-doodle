@@ -68,10 +68,10 @@ pipeline {
         }
     }
     
-    // post {
-    //     success {
-    //         archiveArtifacts '/var/jenkins_home/workspace/MyGo/Caches'
-    //         echo 'Hello, world!'
-    //     }
-    // }
+    post {
+        success {
+            archiveArtifacts 'test.json'
+            echo 'Hello, world!'
+        }
+    }
 }
