@@ -36,11 +36,8 @@ pipeline {
                          def image = docker.image('aquasec/trivy:latest')
                          image.inside("--entrypoint '' -v /var/run/docker.sock:/var/run/docker.sock -u root") {
                              sh 'trivy --version'
-                             def status = sh script : 'trivy image mygo:latest --format json --output trivy-report.json ', returnStatus: true
-                             // if (status == 1) {
-                             //     error('Trivy scan failed')
-                             //     return
-                             // }
+                             def status = sh script : 'trivy image mygo:latest --format HTML --output trivy-report.html ', returnStatus: true
+                             // sh ''
                          }                     
                     // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.49.1 image python:3.4-alpine'
                 }
@@ -65,7 +62,8 @@ pipeline {
     
     post {
         success {
-            archiveArtifacts allowEmptyArchive: true, artifacts: 'trivy-report.json'
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'trivy-report.html'
+            // archiveArtifacts allowEmptyArchive: true, artifacts: 'trivy-report.html'
             // archiveArtifacts allowEmptyArchive: true, artifacts: 'zap-report.json'
             echo 'Build success!!!'
         }
