@@ -1,4 +1,5 @@
 def changedFiles = []
+def buildList = []
 pipeline {
     agent any
     tools {
@@ -30,7 +31,7 @@ pipeline {
                     for (thing in env.MODULE.split(',')) {
                         echo thing
                     }
-                    def buildList = makeList(changedFiles)
+                    buildList = makeList(changedFiles)
                     if (buildList.size() != 0) {
                         echo 'buildList'
                         for (a in buildList) {
@@ -42,24 +43,12 @@ pipeline {
         }
         stage('Build app') {
             steps {
-                script {
-                    echo "end"
-                // for (elem in "Hello,/world") {
-                //     if (elem == 47) {
-                //         echo "test test"
-                //     }
-                //     else {
-                //         echo elem
-                //     }
-                // }
+                for (elem in buildList) {
+                    sh 'go build -o ${elem} ${elem}/main.go'
                 }
+                sh 'ls -l'
             }
         }
-    //     stage('Build app') {
-    //         steps {
-    //             sh 'go build -o main ./...'
-    //         }
-    //     }
     //     stage('sonar scanner') {
     //         steps {
     //             script {
