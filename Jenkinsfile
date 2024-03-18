@@ -6,6 +6,9 @@ pipeline {
         // dockerTool 'docker'
         // 'hudson.plugins.sonar.SonarRunnerInstallation' 'sonar'
     }   
+    environment {
+        MODULE = 'mod1,mod2,mod3'
+    }
     stages {
         stage('check') {
             steps {
@@ -115,11 +118,14 @@ pipeline {
 }
 
 def makeList(ArrayList list) {
+    def moduleList = env.MODULE.split(',')
     def ListString = []
     for (element in list) {
         ListString = element.split('/')
         for (int i = 0; i < ListString.size() - 1 ; i++) {
-            echo ListString[i]
+            if ((moduleList.find {it == ListString[i]}) != null) {
+                echo ListString[i]
+            }
         }
     }
 }
