@@ -117,7 +117,7 @@ pipeline {
     //         }
     //     }
     // }
-    
+    }
     post {
         success {
             script {
@@ -130,8 +130,8 @@ pipeline {
             echo 'Build success!!!'
         }
     }
-    }
 }
+
 
 def makeList(ArrayList list) {
     echo 'changes'
