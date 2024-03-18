@@ -14,6 +14,8 @@ pipeline {
         stage('check') {
             steps {
                 script {
+                def previousBuild = currentBuild.previousBuild()
+                echo previousBuild
                 for (changeLogSet in currentBuild.changeSets) {
                     for (entry in changeLogSet.getItems()) { 
                         for (file in entry.getAffectedFiles()) {
@@ -47,7 +49,6 @@ pipeline {
                 for (elem in buildList) {
                     sh "go build -o ${elem} ${elem}/main.go"
                 }
-                sh 'ls -l'
                 }
             }
         }
