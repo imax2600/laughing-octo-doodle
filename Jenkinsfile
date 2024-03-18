@@ -92,7 +92,7 @@ pipeline {
                          def image = docker.image('aquasec/trivy:latest')
                          image.inside("--entrypoint ''  -v /var/run/docker.sock:/var/run/docker.sock -u root") {
                             sh 'trivy --version'
-                            for (int i = 1 ; i < buildList.size() ; i ++) {
+                            for (int i = 0 ; i < buildList.size() ; i ++) {
                                 echo "scan ${buildList[i]}"
                                 sh "trivy image ${buildList[i]}:latest --format cyclonedx -o ${buildList[i]}-trivy-report.json "
                                 sh "trivy sbom ${buildList[i]}-trivy-report.json --format template --template '@/contrib/html.tpl' -o ${buildList[i]}-trivy-report.html --severity MEDIUM,HIGH,CRITICAL "
@@ -143,7 +143,7 @@ def makeList(ArrayList list) {
     def ListString = []
     for (element in list) {
         ListString = element.split('/')
-        for (int i = 0; i < ListString.size() - 1 ; i++) {
+        for (int i = 0; i < ListString.size() ; i++) {
             if ((moduleList.find {it == ListString[i]}) != null) {
                 if ((newList.find {it == ListString[i]} == null)) {
                     newList.add(ListString[i])
