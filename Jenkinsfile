@@ -30,7 +30,13 @@ pipeline {
                     for (thing in env.MODULE.split(',')) {
                         echo thing
                     }
-                    makeList(changedFiles)
+                    def buildList = makeList(changedFiles)
+                    if (buildList.size != 0) {
+                        echo 'buildList'
+                        for (a in buildList) {
+                            echo a
+                        }
+                    }
                 }
             }
         }
@@ -117,14 +123,16 @@ pipeline {
 
 def makeList(ArrayList list) {
     echo 'changes'
+    def newList = []
     def moduleList = env.MODULE.split(',')
     def ListString = []
     for (element in list) {
         ListString = element.split('/')
         for (int i = 0; i < ListString.size() - 1 ; i++) {
             if ((moduleList.find {it == ListString[i]}) != null) {
-                echo ListString[i]
+                newList.add(ListString[i])
             }
         }
     }
+    return newList
 }
