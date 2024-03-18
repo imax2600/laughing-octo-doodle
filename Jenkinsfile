@@ -61,18 +61,18 @@ pipeline {
                 }
             }
         }
-        // stage('sonar scanner') {
-        //     steps {
-        //         script {
-        //             def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        stage('sonar scanner') {
+            steps {
+                script {
+                    def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
 
-        //             withSonarQubeEnv('sonar') {
-        //                 sh "${scannerHome}/bin/sonar-scanner"
-        //                 sh 'ls'
-        //             }
-        //         }
-        //     }
-        // }
+                    withSonarQubeEnv('sonar') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                        sh 'ls'
+                    }
+                }
+            }
+        }
         stage('build image') {
             steps {
                 script {
