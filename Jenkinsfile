@@ -118,13 +118,15 @@ pipeline {
     //     }
     // }
     
-    // post {
-    //     success {
-    //         archiveArtifacts allowEmptyArchive: true, artifacts: 'trivy-report.html'
-    //         archiveArtifacts allowEmptyArchive: true, artifacts: 'trivy-report.json'
-    //         // archiveArtifacts allowEmptyArchive: true, artifacts: 'zap-report.json'
-    //         echo 'Build success!!!'
-    //     }
+    post {
+        success {
+            for (element in buildList) {
+                archiveArtifacts allowEmptyArchive: true, artifacts: "${element}-trivy-report.html"
+                archiveArtifacts allowEmptyArchive: true, artifacts: "${element}-trivy-report.json"
+            }
+            // archiveArtifacts allowEmptyArchive: true, artifacts: 'zap-report.json'
+            echo 'Build success!!!'
+        }
     }
 }
 
