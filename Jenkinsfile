@@ -19,7 +19,7 @@ pipeline {
                     for (changeLogSet in previousBuild.changeSets) {
                     for (entry in changeLogSet.getItems()) { 
                         for (file in entry.getAffectedFiles()) {
-                            changedFiles.add(file.getPath()) // add changed file to list
+                            changedFiles.add(file.getPath())
                         }
                     }
                     }
@@ -28,7 +28,7 @@ pipeline {
                 for (changeLogSet in currentBuild.changeSets) {
                     for (entry in changeLogSet.getItems()) { 
                         for (file in entry.getAffectedFiles()) {
-                            changedFiles.add(file.getPath()) // add changed file to list
+                            changedFiles.add(file.getPath()) 
                         }
                     }
                 }
