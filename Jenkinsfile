@@ -14,7 +14,7 @@ pipeline {
         stage('check') {
             steps {
                 script {
-                def previousBuild = currentBuild.previousBuild()
+                def previousBuild = currentBuild.getPreviousBuild().result
                 echo previousBuild
                 for (changeLogSet in currentBuild.changeSets) {
                     for (entry in changeLogSet.getItems()) { 
