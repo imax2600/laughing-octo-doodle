@@ -67,7 +67,7 @@ pipeline {
             steps {
                 script {
                 for (element in buildList) {
-                    echo "docker build -t ${element}:latest --build-arg target=${element} -f Dockerfile-main ."
+                    sh "docker build -t ${element}:latest --build-arg target=${element} -f Dockerfile-main ."
                 }
                 }
             }
@@ -79,13 +79,11 @@ pipeline {
                          // sh 'docker run -u root -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/workspace/MyGo/Caches/:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 0 --format json --output test.json'
                          def image = docker.image('aquasec/trivy:latest')
                          image.inside("--entrypoint ''  -v /var/run/docker.sock:/var/run/docker.sock -u root") {
+                            sh 'trivy --version'
                             for (int i = 0 ; i < 1 ; i ++) {
-                                echo i + '0'
-                                echo buildList[i]
+                                sh "trivy image ${elem}:latest --format cyclonedx -o ${elem}-trivy-report.json "
+                                sh "trivy sbom ${elem}-trivy-report.json --format template --template '@/contrib/html.tpl' -o trivy-report.html --severity MEDIUM,HIGH,CRITICAL "
                             }
-                             // sh 'trivy --version'
-                             // sh 'trivy image mygo:latest --format cyclonedx -o trivy-report.json '
-                             // sh 'trivy sbom trivy-report.json --format template --template "@/contrib/html.tpl" -o trivy-report.html --severity MEDIUM,HIGH,CRITICAL '
                              //sh 'ls -la /usr/local/bin/trivy/ '
                              //sh 'find / -name html.tpl -type f'
                          }                     
