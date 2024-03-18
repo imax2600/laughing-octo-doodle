@@ -23,6 +23,10 @@ pipeline {
         stage('Build apap') {
             steps {
                 script {
+                    echo "Hello"
+                    for (things in  changedFiles) {
+                        echo things
+                    }
                     makeList(changedFiles)
                 }
             }
