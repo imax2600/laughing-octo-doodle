@@ -1,11 +1,9 @@
-# Use a base image
-FROM ubuntu:rolling
+FROM golang:alpine3.17
 
-# Set the working directory inside the container
+ARG target=mod1
+
+COPY /cmd/$target/main /app/main
+
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
-
-# Run a command when the container starts
-CMD ["bash"]
+CMD ["./main"]
