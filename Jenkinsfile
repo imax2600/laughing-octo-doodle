@@ -130,6 +130,7 @@ pipeline {
             echo 'Build success!!!'
         }
     }
+    }
 }
 
 def makeList(ArrayList list) {
