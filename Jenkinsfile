@@ -117,7 +117,7 @@ def makeList(ArrayList list) {
     for (element in list) {
         ListString = element.split('/')
         for (int i = 0; i < ListString.size() - 1 ; i++) {
-            echo ListStribng[i]
+            echo ListString[i]
         }
     }
 }
