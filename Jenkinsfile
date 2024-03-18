@@ -65,7 +65,7 @@ pipeline {
         // }
         stage('build image') {
             steps {
-                script {}
+                script {
                 for (element in buildList) {
                     echo 'docker build -t ${elem}:latest --build-arg target=${element} -f Dockerfile-main .'
                 }
