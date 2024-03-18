@@ -26,12 +26,9 @@ pipeline {
         stage('Build apap') {
             steps {
                 script {
-                    echo "Hello"
-                    for (thing in env.MODULE) {
+                    echo "module"
+                    for (thing in env.MODULE.split(',')) {
                         echo thing
-                    }
-                    for (things in  changedFiles) {
-                        echo things
                     }
                     makeList(changedFiles)
                 }
@@ -40,14 +37,15 @@ pipeline {
         stage('Build app') {
             steps {
                 script {
-                for (elem in "Hello,/world") {
-                    if (elem == 47) {
-                        echo "test test"
-                    }
-                    else {
-                        echo elem
-                    }
-                }
+                    echo "end"
+                // for (elem in "Hello,/world") {
+                //     if (elem == 47) {
+                //         echo "test test"
+                //     }
+                //     else {
+                //         echo elem
+                //     }
+                // }
                 }
             }
         }
@@ -118,6 +116,7 @@ pipeline {
 }
 
 def makeList(ArrayList list) {
+    echo 'changes'
     def moduleList = env.MODULE.split(',')
     def ListString = []
     for (element in list) {
