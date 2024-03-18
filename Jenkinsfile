@@ -80,7 +80,7 @@ pipeline {
                          def image = docker.image('aquasec/trivy:latest')
                          image.inside("--entrypoint '' -v /var/run/docker.sock:/var/run/docker.sock -u root") {
                             for (int i = 0 ; i < 1 ; i ++) {
-                                echo i
+                                echo i + '0'
                             }
                              // sh 'trivy --version'
                              // sh 'trivy image mygo:latest --format cyclonedx -o trivy-report.json '
