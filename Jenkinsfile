@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script {
                 for (elem in buildList) {
-                    sh 'go build -o ${elem} ${elem}/main.go'
+                    sh "go build -o ${elem} ${elem}/main.go"
                 }
                 sh 'ls -l'
                 }
