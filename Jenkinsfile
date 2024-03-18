@@ -14,7 +14,6 @@ pipeline {
         stage('check') {
             steps {
                 script {
-                    ghj
                 def previousBuild = currentBuild.getPreviousBuild()
                 while (previousBuild.result == 'FAILURE') {
                     for (changeLogSet in previousBuild.changeSets) {
