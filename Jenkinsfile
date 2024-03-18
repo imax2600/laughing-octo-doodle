@@ -143,7 +143,9 @@ def makeList(ArrayList list) {
         ListString = element.split('/')
         for (int i = 0; i < ListString.size() - 1 ; i++) {
             if ((moduleList.find {it == ListString[i]}) != null) {
-                newList.add(ListString[i])
+                if ((newList.find {it == ListString[i]} == null)) {
+                    newList.add(ListString[i])
+                }
             }
         }
     }
