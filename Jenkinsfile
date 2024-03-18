@@ -108,7 +108,7 @@ pipeline {
 }
 
 def makeList(ArrayList list) {
-    def ListString = list.split('\\/')
+    def ListString = list.split('/')
     for (element in ListString) {
         echo element
     }
