@@ -82,7 +82,7 @@ pipeline {
                             sh 'trivy --version'
                             for (int i = 0 ; i < buildList.size()-1 ; i ++) {
                                 sh "trivy image ${buildList[i]}:latest --format cyclonedx -o ${buildList[i]}-trivy-report.json "
-                                sh "trivy sbom ${buildList[i]}-trivy-report.json --format template --template '@/contrib/html.tpl' -o trivy-report.html --severity MEDIUM,HIGH,CRITICAL "
+                                sh "trivy sbom ${buildList[i]}-trivy-report.json --format template --template '@/contrib/html.tpl' -o ${buildList[i]}-trivy-report.html --severity MEDIUM,HIGH,CRITICAL "
                             }
                              //sh 'ls -la /usr/local/bin/trivy/ '
                              //sh 'find / -name html.tpl -type f'
