@@ -4,6 +4,7 @@ pipeline {
     agent any
     tools {
         go 'go'
+        nodejs 'node'
         // dockerTool 'docker'
         // 'hudson.plugins.sonar.SonarRunnerInstallation' 'sonar'
     }   
