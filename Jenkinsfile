@@ -13,7 +13,6 @@ pipeline {
     stages {
         stage('check') {
             steps {
-                rtdytfugh
                 script {
                 def previousBuild = currentBuild.getPreviousBuild()
                 while (previousBuild.result == 'FAILURE') {
