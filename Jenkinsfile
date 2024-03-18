@@ -72,23 +72,26 @@ pipeline {
                 }
             }
         }
-    //     stage('trivy scan') {
-    //         steps {
-    //             script {
-    //                      // sh 'docker build -t mygo:latest -f Dockerfile-main .'
-    //                      // sh 'docker run -u root -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/workspace/MyGo/Caches/:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 0 --format json --output test.json'
-    //                      def image = docker.image('aquasec/trivy:latest')
-    //                      image.inside("--entrypoint '' -v /var/run/docker.sock:/var/run/docker.sock -u root") {
-    //                          sh 'trivy --version'
-    //                          sh 'trivy image mygo:latest --format cyclonedx -o trivy-report.json '
-    //                          sh 'trivy sbom trivy-report.json --format template --template "@/contrib/html.tpl" -o trivy-report.html --severity MEDIUM,HIGH,CRITICAL '
-    //                          //sh 'ls -la /usr/local/bin/trivy/ '
-    //                          //sh 'find / -name html.tpl -type f'
-    //                      }                     
-    //                 // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.49.1 image python:3.4-alpine'
-    //             }
-    //         }
-    //     }
+        stage('trivy scan') {
+            steps {
+                script {
+                         // sh 'docker build -t mygo:latest -f Dockerfile-main .'
+                         // sh 'docker run -u root -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/workspace/MyGo/Caches/:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 0 --format json --output test.json'
+                         def image = docker.image('aquasec/trivy:latest')
+                         image.inside("--entrypoint '' -v /var/run/docker.sock:/var/run/docker.sock -u root") {
+                            for (int i = 0 ; i < 1 ; i ++) {
+                                echo i
+                            }
+                             // sh 'trivy --version'
+                             // sh 'trivy image mygo:latest --format cyclonedx -o trivy-report.json '
+                             // sh 'trivy sbom trivy-report.json --format template --template "@/contrib/html.tpl" -o trivy-report.html --severity MEDIUM,HIGH,CRITICAL '
+                             //sh 'ls -la /usr/local/bin/trivy/ '
+                             //sh 'find / -name html.tpl -type f'
+                         }                     
+                    // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.49.1 image python:3.4-alpine'
+                }
+            }
+        }
     //     stage('Deploy') {
     //         steps {
     //             echo 'Deploying...'
