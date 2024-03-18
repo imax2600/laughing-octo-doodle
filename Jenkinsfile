@@ -13,9 +13,13 @@ pipeline {
     stages {
         stage('check') {
             steps {
+                rtdytfugh
                 script {
-                def previousBuild = currentBuild.getPreviousBuild().result
-                echo previousBuild
+                def previousBuild = currentBuild.getPreviousBuild()
+                while (previousBuild.result == 'FAILURE') {
+                    echo "ffff"
+                    previousBuild = previousBuild.getPreviousBuild()
+                }
                 for (changeLogSet in currentBuild.changeSets) {
                     for (entry in changeLogSet.getItems()) { 
                         for (file in entry.getAffectedFiles()) {
