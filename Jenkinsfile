@@ -24,7 +24,9 @@ pipeline {
             steps {
                 script {
                     echo "Hello"
-                    echo "${env.MODULE}"
+                    for (thing in env.MODULE) {
+                        echo thing
+                    }
                     for (things in  changedFiles) {
                         echo things
                     }
