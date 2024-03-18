@@ -80,7 +80,7 @@ pipeline {
                 for (element in buildList) {
                     sh "docker build -t ${element}:latest --build-arg target=${element} -f Dockerfile-main ."
                 }
-                sh 'docker images ps'
+                sh 'docker images'
                 }
             }
         }
