@@ -14,9 +14,16 @@ pipeline {
         stage('check') {
             steps {
                 script {
+                    ghj
                 def previousBuild = currentBuild.getPreviousBuild()
                 while (previousBuild.result == 'FAILURE') {
-                    echo "ffff"
+                    for (changeLogSet in previousBuild.changeSets) {
+                    for (entry in changeLogSet.getItems()) { 
+                        for (file in entry.getAffectedFiles()) {
+                            changedFiles.add(file.getPath()) // add changed file to list
+                        }
+                    }
+                    }
                     previousBuild = previousBuild.getPreviousBuild()
                 }
                 for (changeLogSet in currentBuild.changeSets) {
