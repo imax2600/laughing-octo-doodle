@@ -51,23 +51,25 @@ pipeline {
                 }
             }
         }
-    //     stage('sonar scanner') {
-    //         steps {
-    //             script {
-    //                 def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        // stage('sonar scanner') {
+        //     steps {
+        //         script {
+        //             def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
 
-    //                 withSonarQubeEnv('sonar') {
-    //                     sh "${scannerHome}/bin/sonar-scanner"
-    //                     sh 'ls'
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     stage('build image') {
-    //         steps {
-    //             sh 'docker build -t mygo:latest -f Dockerfile-main .'
-    //         }
-    //     }
+        //             withSonarQubeEnv('sonar') {
+        //                 sh "${scannerHome}/bin/sonar-scanner"
+        //                 sh 'ls'
+        //             }
+        //         }
+        //     }
+        // }
+        stage('build image') {
+            steps {
+                for (element in buildList) {
+                    echo 'docker build -t ${elem}:latest --build-arg target=${element} -f Dockerfile-main .'
+                }
+            }
+        }
     //     stage('trivy scan') {
     //         steps {
     //             script {
