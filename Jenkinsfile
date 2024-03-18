@@ -137,7 +137,6 @@ pipeline {
 
 
 def makeList(ArrayList list) {
-    echo 'changes'
     def newList = []
     def moduleList = env.MODULE.split(',')
     def ListString = []
