@@ -31,7 +31,7 @@ pipeline {
                         echo thing
                     }
                     def buildList = makeList(changedFiles)
-                    if (buildList.size != 0) {
+                    if (buildList.size() != 0) {
                         echo 'buildList'
                         for (a in buildList) {
                             echo a
