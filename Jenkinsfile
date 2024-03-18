@@ -23,9 +23,7 @@ pipeline {
         stage('Build apap') {
             steps {
                 script {
-                for (elem in changedFiles) {
-                    echo elem
-                }
+                    makeList(changedFiles)
                 }
             }
         }
@@ -110,5 +108,8 @@ pipeline {
 }
 
 def makeList(ArrayList list) {
-    
+    def ListString = list.split('\\/')
+    for (element in ListString) {
+        echo element
+    }
 }
