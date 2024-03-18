@@ -81,8 +81,8 @@ pipeline {
                          image.inside("--entrypoint ''  -v /var/run/docker.sock:/var/run/docker.sock -u root") {
                             sh 'trivy --version'
                             for (int i = 0 ; i < 1 ; i ++) {
-                                sh "trivy image ${elem}:latest --format cyclonedx -o ${elem}-trivy-report.json "
-                                sh "trivy sbom ${elem}-trivy-report.json --format template --template '@/contrib/html.tpl' -o trivy-report.html --severity MEDIUM,HIGH,CRITICAL "
+                                sh "trivy image ${buildList[i]}:latest --format cyclonedx -o ${buildList[i]}-trivy-report.json "
+                                sh "trivy sbom ${buildList[i]}-trivy-report.json --format template --template '@/contrib/html.tpl' -o trivy-report.html --severity MEDIUM,HIGH,CRITICAL "
                             }
                              //sh 'ls -la /usr/local/bin/trivy/ '
                              //sh 'find / -name html.tpl -type f'
