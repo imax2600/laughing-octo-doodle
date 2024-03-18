@@ -24,6 +24,7 @@ pipeline {
             steps {
                 script {
                     echo "Hello"
+                    echo "${env.MODULE}"
                     for (things in  changedFiles) {
                         echo things
                     }
@@ -115,8 +116,8 @@ def makeList(ArrayList list) {
     def ListString = []
     for (element in list) {
         ListString = element.split('/')
-        for (elem in ListString) {
-            echo elem
+        for (i in 0 until ListString.size()) {
+            echo ListStribng[i]
         }
     }
 }
