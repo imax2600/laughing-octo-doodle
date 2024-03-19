@@ -40,15 +40,20 @@ pipeline {
             steps {
                 script {
                     echo "module"
-                    for (thing in env.MODULE.split(',')) {
-                        echo thing
-                    }
+                    // for (thing in env.MODULE.split(',')) {
+                    //     echo thing
+                    // }
                     buildList = makeList(changedFiles)
                     if (buildList.size() != 0) {
                         echo 'buildList'
                         for (a in buildList) {
                             echo a
                         }
+                    }
+                    else {
+                        echo "No module to be build. Jenkins will stop."
+                        currentBuild.result = 'SUCCESS'
+                        return
                     }
                 }
             }
@@ -93,7 +98,7 @@ pipeline {
                          image.inside("--entrypoint ''  -v /var/run/docker.sock:/var/run/docker.sock -u root") {
                             sh 'trivy --version'
                             for (int i = 0 ; i < buildList.size() ; i ++) {
-                                echo "scan ${buildList[i]}"
+                                echo "scanning ${buildList[i]}"
                                 sh "trivy image ${buildList[i]}:latest --format cyclonedx -o ${buildList[i]}-trivy-report.json "
                                 sh "trivy sbom ${buildList[i]}-trivy-report.json --format template --template '@/contrib/html.tpl' -o ${buildList[i]}-trivy-report.html --severity MEDIUM,HIGH,CRITICAL "
                             }
