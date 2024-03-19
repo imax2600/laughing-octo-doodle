@@ -52,8 +52,8 @@ pipeline {
                     }
                     else {
                         echo "No module to be build. Jenkins will stop."
-                        currentBuild.result = 'SUCCESS'
-                        return
+                        currentBuild.result = 'ABORTED'
+                        currentBuild.abort()
                     }
                 }
             }
