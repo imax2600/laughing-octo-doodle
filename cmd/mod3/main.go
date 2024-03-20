@@ -3,5 +3,5 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Printf("1231fg3411211hjfgtyu112ashhherteterhuuu111unqq121233212121212112121, 123rf!\n")
+	fmt.Printf("This is module 3\n")
 }
