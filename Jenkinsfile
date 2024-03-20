@@ -82,7 +82,7 @@ pipeline {
             steps {
                 script {
                 for (element in buildList) {
-                    sh "docker build -t ${element}:latest -p 8180:8080 --build-arg target=${element} -f Dockerfile-main ."
+                    sh "docker build -t ${element}:latest --build-arg target=${element} -f Dockerfile-main ."
                 }
                 sh 'docker images'
                 }
