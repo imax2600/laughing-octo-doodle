@@ -15,7 +15,7 @@ pipeline {
         stage('k8s') {
             steps {
                 withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://127.0.0.1:6443') {
-                    sh 'ls -l'
+                    sh 'kubectl cluster-info'
                 }
             }
         }
