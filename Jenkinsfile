@@ -15,7 +15,7 @@ pipeline {
         stage('k8s') {
             steps {
                 withKubeConfig(caCertificate: '', clusterName: 'docker-desktop', contextName: 'docker-desktop', credentialsId: 'testK8s', namespace: 'jenkins', restrictKubeConfigAccess: false, serverUrl: 'https://127.0.0.1:6443') {
-                    sh 'kubectl cluster-info'
+                    sh 'ls -l'
                 }
             }
         }
