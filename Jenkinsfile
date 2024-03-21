@@ -1,5 +1,6 @@
 def changedFiles = []
 def buildList = []
+def randomNumber = generateRandomNumber(100)
 pipeline {
     agent any
     tools {
@@ -82,7 +83,7 @@ pipeline {
             steps {
                 script {
                 for (element in buildList) {
-                    sh "docker build -t imax2600/${element}:latest --build-arg target=${element} -f Dockerfile-main ."
+                    sh "docker build -t imax2600/${element}:${randomNumber} --build-arg target=${element} -f Dockerfile-main ."
                 }
                 sh 'docker images'
                 }
@@ -98,7 +99,7 @@ pipeline {
                             sh 'trivy --version'
                             for (int i = 0 ; i < buildList.size() ; i ++) {
                                 echo "scanning ${buildList[i]}"
-                                sh "trivy image imax2600/${buildList[i]}:latest --format cyclonedx -o ${buildList[i]}-trivy-report.json "
+                                sh "trivy image imax2600/${buildList[i]} --format cyclonedx -o ${buildList[i]}-trivy-report.json "
                                 sh "trivy sbom ${buildList[i]}-trivy-report.json --format template --template '@/contrib/html.tpl' -o ${buildList[i]}-trivy-report.html --severity MEDIUM,HIGH,CRITICAL "
                             }
                              //sh 'ls -la /usr/local/bin/trivy/ '
@@ -112,7 +113,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'docker-pass', variable: 'DK_PASS')]) {
                     sh "docker login -u imax2600 -p $DK_PASS"
-                    sh "docker push imax2600/mod1:latest"
+                    sh "docker push imax2600/mod1:${randomNumber}"
                     sh "docker logout "
                 }
                 withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
@@ -168,4 +169,7 @@ def makeList(ArrayList list) {
         }
     }
     return newList
+}
+def generateRandomNumber(int max) {
+    return Math.abs(new Random().nextInt() % max)
 }
