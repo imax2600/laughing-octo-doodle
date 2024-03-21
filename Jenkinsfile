@@ -88,30 +88,30 @@ pipeline {
                 }
             }
         }
-        stage('trivy scan') {
-            steps {
-                script {
-                         // sh 'docker build -t mygo:latest -f Dockerfile-main .'
-                         // sh 'docker run -u root -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/workspace/MyGo/Caches/:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 0 --format json --output test.json'
-                         def image = docker.image('aquasec/trivy:latest')
-                         image.inside("--entrypoint ''  -v /var/run/docker.sock:/var/run/docker.sock -u root") {
-                            sh 'trivy --version'
-                            for (int i = 0 ; i < buildList.size() ; i ++) {
-                                echo "scanning ${buildList[i]}"
-                                sh "trivy image imax2600/${buildList[i]}:latest --format cyclonedx -o ${buildList[i]}-trivy-report.json "
-                                sh "trivy sbom ${buildList[i]}-trivy-report.json --format template --template '@/contrib/html.tpl' -o ${buildList[i]}-trivy-report.html --severity MEDIUM,HIGH,CRITICAL "
-                            }
-                             //sh 'ls -la /usr/local/bin/trivy/ '
-                             //sh 'find / -name html.tpl -type f'
-                         }                     
-                    // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.49.1 image python:3.4-alpine'
-                }
-            }
-        }
+        // stage('trivy scan') {
+        //     steps {
+        //         script {
+        //                  // sh 'docker build -t mygo:latest -f Dockerfile-main .'
+        //                  // sh 'docker run -u root -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/workspace/MyGo/Caches/:/root/.cache/ aquasec/trivy image mygo:latest --exit-code 0 --format json --output test.json'
+        //                  def image = docker.image('aquasec/trivy:latest')
+        //                  image.inside("--entrypoint ''  -v /var/run/docker.sock:/var/run/docker.sock -u root") {
+        //                     sh 'trivy --version'
+        //                     for (int i = 0 ; i < buildList.size() ; i ++) {
+        //                         echo "scanning ${buildList[i]}"
+        //                         sh "trivy image imax2600/${buildList[i]}:latest --format cyclonedx -o ${buildList[i]}-trivy-report.json "
+        //                         sh "trivy sbom ${buildList[i]}-trivy-report.json --format template --template '@/contrib/html.tpl' -o ${buildList[i]}-trivy-report.html --severity MEDIUM,HIGH,CRITICAL "
+        //                     }
+        //                      //sh 'ls -la /usr/local/bin/trivy/ '
+        //                      //sh 'find / -name html.tpl -type f'
+        //                  }                     
+        //             // sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.49.1 image python:3.4-alpine'
+        //         }
+        //     }
+        // }
         stage('deploy') {
             steps {
                 withCredentials([string(credentialsId: 'docker-pass', variable: 'DK_PASS')]) {
-                    sh "docker login -u imax2600 --password-stdin $DK_PASS"
+                    sh "docker login -u imax2600 -p $DK_PASS"
                     sh "docker push imax2600/mod1:latest"
                     sh "docker logout "
                 }
