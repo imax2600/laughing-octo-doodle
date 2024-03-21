@@ -19,6 +19,7 @@ pipeline {
                 }
             }
         }
+    }
     //     stage('check') {
     //         steps {
     //             script {
