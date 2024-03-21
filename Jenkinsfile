@@ -117,6 +117,7 @@ pipeline {
                 }
                 withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                     sh 'kubectl apply -f service.yaml'
+                    sh 'kubectl apply -f deployment.yaml'
                 }
             }
         }
