@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: module-app
-        image: imax2600/mod1
+        image: imax2600/mod1:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
