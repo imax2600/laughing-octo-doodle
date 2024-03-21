@@ -14,8 +14,9 @@ pipeline {
     stages {
         stage('k8s') {
             steps {
-                script {
-                    sh 'docker info'
+                withCredentials([string(credentialsId: 'docker-pass', variable: 'PASS')]) {
+                    sh 'echo "Secret value: $PASS"'
+                    // Now you can use the secret value in your pipeline steps
                 }
                 withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                     sh 'kubectl apply -f service.yaml'
