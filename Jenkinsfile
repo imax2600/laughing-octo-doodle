@@ -15,7 +15,7 @@ pipeline {
         stage('k8s') {
             steps {
                 withCredentials([string(credentialsId: 'docker-pass', variable: 'PASS')]) {
-                    sh 'echo "Secret value: $PASS"'
+                    sh 'docker login -u imax2600 -p $PASS"'
                     // Now you can use the secret value in your pipeline steps
                 }
                 withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
