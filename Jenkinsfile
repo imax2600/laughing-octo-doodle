@@ -118,13 +118,13 @@ pipeline {
                     sh "docker logout "
                 }
                 withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
-                    def image = docker.image('alpine:latest')
+                    def image = docker.image('rancher/helm-controller:v0.15.9')
                     image.inside {
-                        sh 'ls'
+                        sh 'helm version'
                     }
-                    sh 'kubectl apply -f service.yaml'
-                    sh 'kubectl apply -f deployment.yaml'
-                    sh 'kubectl rollout restart deployment test-app'
+                    // sh 'kubectl apply -f service.yaml'
+                    // sh 'kubectl apply -f deployment.yaml'
+                    // sh 'kubectl rollout restart deployment test-app'
                 }
                 }
             }
