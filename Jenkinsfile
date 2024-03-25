@@ -123,7 +123,7 @@ pipeline {
                         withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                         script {
                             for (module in buildList) {
-                                sh "helm install --namespace ${module} --values deploychart/values/${module}-values.yaml deploychart"
+                                sh "helm upgrade --install ${module} --values deploychart/values/${module}-values.yaml deploychart"
                             }
                         }    
                         // sh 'kubectl config view'
