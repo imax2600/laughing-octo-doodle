@@ -10,7 +10,7 @@ container:
   port: 3000
 
 serviceName: "module3-service"
-serviceType: Loadbalancer
+serviceType: LoadBalancer
 
 ports:
   protocol: TCP
