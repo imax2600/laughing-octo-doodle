@@ -121,6 +121,7 @@ pipeline {
                     def image = docker.image('okteto/helm-chart-manager:latest')
                     image.inside ("--entrypoint '' -u root ") {
                         withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
+                        sh 'kubectl config view'
                         sh 'helm repo add demo-frontend https://yushiwho.github.io/charts'
                         sh 'helm repo update'
                         sh 'helm install my-release demo-frontend/demo-frontend --namespace demo-frontend'
