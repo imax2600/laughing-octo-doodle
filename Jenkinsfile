@@ -119,7 +119,7 @@ pipeline {
                 }
                 withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                     def image = docker.image('rancher/helm-controller:v0.15.9')
-                    image.inside {
+                    image.inside ("--entrypoint '' ") {
                         sh 'helm version'
                     }
                     // sh 'kubectl apply -f service.yaml'
