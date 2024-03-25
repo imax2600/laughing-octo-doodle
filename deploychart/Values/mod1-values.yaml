@@ -1,0 +1,18 @@
+
+replicaCount: 2
+
+appName: "module1-app"
+
+container:
+  name: "module1"
+  image: "imax2600/mod1:latest"
+  imagePullPolicy: Always
+  port: 3000
+
+serviceName: "module1-service"
+serviceType: Loadbalancer
+
+ports:
+  protocol: TCP
+  port: 3000
+  targetport: 3000
