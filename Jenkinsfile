@@ -111,6 +111,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
+                script {
                 withCredentials([string(credentialsId: 'docker-pass', variable: 'DK_PASS')]) {
                     sh "docker login -u imax2600 -p $DK_PASS"
                     sh "docker push imax2600/mod1:latest"
@@ -124,6 +125,7 @@ pipeline {
                     sh 'kubectl apply -f service.yaml'
                     sh 'kubectl apply -f deployment.yaml'
                     sh 'kubectl rollout restart deployment test-app'
+                }
                 }
             }
         }
