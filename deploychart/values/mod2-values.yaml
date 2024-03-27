@@ -4,7 +4,7 @@ replicaCount: 2
 appName: "module2-app"
 
 container:
-  name: "module2"
+  name: "module2-app"
   image: "imax2600/mod1:latest"
   imagePullPolicy: Always
   port: 3000
