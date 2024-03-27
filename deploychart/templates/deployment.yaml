@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.appName }}
   annotations:
-    timestamp: {{ .Release.Time }}
+    helm.sh/release-time: "{{ .Release.Time | quote }}"
 spec:
   replicas: 2
   selector:
