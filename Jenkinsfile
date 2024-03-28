@@ -124,7 +124,7 @@ pipeline {
                 }
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                     def helm = docker.image('chainguard/helm-chartmuseum:latest')
-                    helm.inside ("  -u root ") {
+                    helm.inside (" --entrypoint '' -u root ") {
                         withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.0.227:49381') {
                         script {
                             for (module in buildList) {
