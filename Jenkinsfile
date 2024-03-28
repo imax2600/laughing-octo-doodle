@@ -150,22 +150,24 @@ pipeline {
     //             echo 'Deploying...'
     //         }
     //     }
-     stage('zap scan') {
-             steps {
-                 script {
-                    sh 'mkdir zap'
-                    sh 'docker run -u root -v zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.0.227:3000 -r zap-report1.html -I'
-                    // sh 'docker run -u root -v zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.0.227:3001 -r zap-report2.html -I'
-                    // sh 'docker run -u root -v zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.0.227:3002 -r zap-report3.html -I'
-                    // def zap = docker.image('owasp/zap2docker-stable:latest')
-                    // zap.inside('--entrypoint \'\' -v zap:/zap/wrk -u root') {
-                    //      sh 'zap-full-scan.py -t "http://192.168.0.227:3000" -r zap-report1.html || true'
-                    //      sh 'zap-full-scan.py -t "http://192.168.0.227:3001" -r zap-report2.html || true'
-                    //      sh 'zap-full-scan.py -t "http://192.168.0.227:3002" -r zap-report3.html || true'
-                    // }
-                 }
-             }
-    }
+
+    //  stage('zap scan') {
+    //          steps {
+    //              script {
+    //                 sh 'mkdir zap'
+    //                 sh 'docker run -u root -v zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.0.227:3000 -r zap-report1.html -I'
+    //                 // sh 'docker run -u root -v zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.0.227:3001 -r zap-report2.html -I'
+    //                 // sh 'docker run -u root -v zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.0.227:3002 -r zap-report3.html -I'
+    //                 // def zap = docker.image('owasp/zap2docker-stable:latest')
+    //                 // zap.inside('--entrypoint \'\' -v zap:/zap/wrk -u root') {
+    //                 //      sh 'zap-full-scan.py -t "http://192.168.0.227:3000" -r zap-report1.html || true'
+    //                 //      sh 'zap-full-scan.py -t "http://192.168.0.227:3001" -r zap-report2.html || true'
+    //                 //      sh 'zap-full-scan.py -t "http://192.168.0.227:3002" -r zap-report3.html || true'
+    //                 // }
+    //              }
+    //          }
+    // }
+
     }
     //}
     post {
