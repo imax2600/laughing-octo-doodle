@@ -124,7 +124,7 @@ pipeline {
                 }
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                     def helm = docker.image('fluxcd/helm-controller:v0.37.4-helm3140')
-                    helm.inside (" --entrypoint ''  -u root ") {
+                    helm.inside ("  -u root ") {
                         withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.0.227:49381') {
                         script {
                             for (module in buildList) {
