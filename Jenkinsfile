@@ -173,9 +173,9 @@ pipeline {
                 archiveArtifacts allowEmptyArchive: true, artifacts: "${element}-trivy-report.json"
             }
             }
-            archiveArtifacts allowEmptyArchive: true, artifacts: "zap/zap-report1.html"
-            archiveArtifacts allowEmptyArchive: true, artifacts: "zap/zap-report2.html"
-            archiveArtifacts allowEmptyArchive: true, artifacts: "zap/zap-report3.html"
+            archiveArtifacts allowEmptyArchive: true, artifacts: "zap-report1.html"
+            archiveArtifacts allowEmptyArchive: true, artifacts: "zap-report2.html"
+            archiveArtifacts allowEmptyArchive: true, artifacts: "zap-report3.html"
             // archiveArtifacts allowEmptyArchive: true, artifacts: 'zap-report.json'
             echo 'Build success!!!'
         }
