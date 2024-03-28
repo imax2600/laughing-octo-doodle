@@ -123,8 +123,8 @@ pipeline {
                     sh "docker logout "
                 }
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
-                    def image = docker.image('okteto/helm-chart-manager:latest')
-                    image.inside ("--entrypoint '' -u root ") {
+                    def helm = docker.image('okteto/helm-chart-manager:latest')
+                    helm.inside ("--entrypoint '' -u root ") {
                         withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.49.2:6443') {
                         script {
                             for (module in buildList) {
