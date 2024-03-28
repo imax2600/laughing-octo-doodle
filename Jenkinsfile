@@ -1,6 +1,7 @@
 def changedFiles = []
 def buildList = []
 def randomNumber = generateRandomNumber(100)
+def date = ""
 pipeline {
     agent any
     tools {
@@ -16,6 +17,8 @@ pipeline {
         stage('check') {
             steps {
                 script {
+                def TIMESTAMP = env.BUILD_ID.toLong() / 1000
+                date = sh(script: "date -d @${TIMESTAMP} '+%Y%m%d%H%M%S'", returnStdout: true).trim()
                 def previousBuild = currentBuild.getPreviousBuild()
                 while (previousBuild.result == 'FAILURE') {
                     for (changeLogSet in previousBuild.changeSets) {
@@ -83,7 +86,7 @@ pipeline {
             steps {
                 script {
                 for (element in buildList) {
-                    sh "docker build -t imax2600/${element}:latest --build-arg target=${element} -f Dockerfile-main ."
+                    sh "docker build -t imax2600/${element}:${date} --build-arg target=${element} -f Dockerfile-main ."
                 }
                 sh 'docker images'
                 }
@@ -99,7 +102,7 @@ pipeline {
                             sh 'trivy --version'
                             for (int i = 0 ; i < buildList.size() ; i ++) {
                                 echo "scanning ${buildList[i]}"
-                                sh "trivy image imax2600/${buildList[i]}:latest --format cyclonedx -o ${buildList[i]}-trivy-report.json "
+                                sh "trivy image imax2600/${buildList[i]}:${date} --format cyclonedx -o ${buildList[i]}-trivy-report.json "
                                 sh "trivy sbom ${buildList[i]}-trivy-report.json --format template --template '@/contrib/html.tpl' -o ${buildList[i]}-trivy-report.html --severity MEDIUM,HIGH,CRITICAL "
                             }
                              //sh 'ls -la /usr/local/bin/trivy/ '
@@ -123,7 +126,7 @@ pipeline {
                         withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                         script {
                             for (module in buildList) {
-                                sh "helm upgrade --install ${module} --values deploychart/values/${module}-values.yaml deploychart"
+                                sh "helm upgrade --install ${module} --values deploychart/values/${module}-values.yaml deploychart --set container.image=imax2600/mod1:${date}"
                             }
                         }    
                         // sh 'kubectl config view'
