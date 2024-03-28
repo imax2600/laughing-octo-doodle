@@ -123,7 +123,7 @@ pipeline {
                     sh "docker logout "
                 }
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
-                    def helm = docker.image('chainguard/helm-chartmuseum:latest')
+                    def helm = docker.image('fluxcd/helm-operator:1.4.4')
                     helm.inside ("--entrypoint ''  -u root ") {
                         withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.49.2:6443') {
                         script {
