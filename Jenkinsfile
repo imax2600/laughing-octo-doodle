@@ -128,7 +128,7 @@ pipeline {
                         withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                         script {
                             for (module in buildList) {
-                                sh "helm upgrade --install ${module} --values deploychart/values/${module}-values.yaml deploychart --set container.image=imax2600/${module}:${date}"
+                                sh "helm upgrade --install ${module} --values deploychart/values/${module}-values.yaml deploychart --set .Values.container.image=imax2600/${module}:${date}"
                             }
                         }    
                         // sh 'kubectl config view'
