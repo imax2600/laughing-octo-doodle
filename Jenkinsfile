@@ -117,7 +117,7 @@ pipeline {
                 script {
                 withCredentials([string(credentialsId: 'docker-pass', variable: 'DK_PASS')]) {
                     sh "docker login -u imax2600 -p $DK_PASS"
-                    sh "docker push imax2600/mod1:latest"
+                    sh "docker push imax2600/mod1:${date}"
                     sh "docker logout "
                 }
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
