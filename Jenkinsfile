@@ -154,12 +154,15 @@ pipeline {
              steps {
                  script {
                     sh 'mkdir zap'
-                    def zap = docker.image('owasp/zap2docker-stable:latest')
-                    zap.inside('--entrypoint \'\' -v zap:/zap/wrk -u root') {
-                         sh 'zap-full-scan.py -t "http://192.168.0.227:3000" -r zap-report1.html || true'
-                         sh 'zap-full-scan.py -t "http://192.168.0.227:3001" -r zap-report2.html || true'
-                         sh 'zap-full-scan.py -t "http://192.168.0.227:3002" -r zap-report3.html || true'
-                    }
+                    sh 'docker run -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.0.227:3000 -r zap-report1.html'
+                    sh 'docker run -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.0.227:3001 -r zap-report2.html'
+                    sh 'docker run -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.0.227:3002 -r zap-report3.html'
+                    // def zap = docker.image('owasp/zap2docker-stable:latest')
+                    // zap.inside('--entrypoint \'\' -v zap:/zap/wrk -u root') {
+                    //      sh 'zap-full-scan.py -t "http://192.168.0.227:3000" -r zap-report1.html || true'
+                    //      sh 'zap-full-scan.py -t "http://192.168.0.227:3001" -r zap-report2.html || true'
+                    //      sh 'zap-full-scan.py -t "http://192.168.0.227:3002" -r zap-report3.html || true'
+                    // }
                  }
              }
     }
