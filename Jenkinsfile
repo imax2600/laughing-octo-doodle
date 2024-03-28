@@ -124,7 +124,7 @@ pipeline {
                 }
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                     def helm = docker.image('okteto/helm-chart-manager:latest')
-                    helm.inside ("--entrypoint '' -u root ") {
+                    helm.inside ("--entrypoint '' --platform='linux/amd64'  -u root ") {
                         withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.49.2:6443') {
                         script {
                             for (module in buildList) {
