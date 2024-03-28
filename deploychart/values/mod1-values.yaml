@@ -14,5 +14,5 @@ serviceType: LoadBalancer
 
 ports:
   protocol: TCP
-  port: 3000
+  port: 4000
   targetport: 3000
