@@ -17,8 +17,8 @@ pipeline {
         stage('check') {
             steps {
                 script {
-                def TIMESTAMP = env.BUILD_ID.toLong() / 1000
-                date = sh(script: "date -d @${TIMESTAMP} '+%Y%m%d%H%M%S'", returnStdout: true).trim()
+                def now = new Date()
+                date = now.format("yyMMddHHmm", TimeZone.getTimeZone('UTC'))
                 def previousBuild = currentBuild.getPreviousBuild()
                 while (previousBuild.result == 'FAILURE') {
                     for (changeLogSet in previousBuild.changeSets) {
@@ -117,7 +117,9 @@ pipeline {
                 script {
                 withCredentials([string(credentialsId: 'docker-pass', variable: 'DK_PASS')]) {
                     sh "docker login -u imax2600 -p $DK_PASS"
-                    sh "docker push imax2600/mod1:${date}"
+                    for (module in buildList) {
+                    sh "docker push imax2600/${module}:${date}"
+                    }
                     sh "docker logout "
                 }
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
@@ -126,7 +128,7 @@ pipeline {
                         withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                         script {
                             for (module in buildList) {
-                                sh "helm upgrade --install ${module} --values deploychart/values/${module}-values.yaml deploychart --set container.image=imax2600/mod1:${date}"
+                                sh "helm upgrade --install ${module} --values deploychart/values/${module}-values.yaml deploychart --set container.image=imax2600/${module}:${date}"
                             }
                         }    
                         // sh 'kubectl config view'
