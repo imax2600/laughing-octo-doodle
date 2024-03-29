@@ -122,7 +122,7 @@ pipeline {
                     }
                     sh "docker logout "
                 }
-                sh 'docker build -t helmImage:latest -f Dockerfile-helm.'
+                sh 'docker build -t helmImage:latest -f Dockerfile-helm .'
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                     def helm = docker.image('helmImage:latest')
                     helm.inside ("-u root") {
