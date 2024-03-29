@@ -125,7 +125,7 @@ pipeline {
                 sh 'docker build -t helmimage:latest -f Dockerfile-helm .'
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                     def helm = docker.image('helmimage:latest')
-                    helm.inside{
+                    helm.inside("--entrypoint '' "){
                         sh 'ls'
                     }
                     // helm.inside ("-u root") {
