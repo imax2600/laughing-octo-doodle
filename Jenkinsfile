@@ -126,7 +126,7 @@ pipeline {
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                     def helm = docker.image('helmimage:latest')
                     helm.inside ("--entrypoint '' -u root") {
-                        withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://127.0.0.1:51072') {
+                        withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.0.227:51072') {
                         script {
                             for (module in buildList) {
                                 sh "helm upgrade --install ${module} --values deploychart/values/${module}-values.yaml deploychart --set container.image=imax2600/${module}:${date}"
