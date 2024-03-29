@@ -124,7 +124,7 @@ pipeline {
                 }
                 sh 'docker build -t helmimage:latest -f Dockerfile-helm .'
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
-                    def helm = docker.image('helmImage:latest')
+                    def helm = docker.image('helmimage:latest')
                     helm.inside ("-u root") {
                         withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.0.227:49440') {
                         script {
