@@ -125,20 +125,20 @@ pipeline {
                 sh 'docker build -t helmimage:latest -f Dockerfile-helm .'
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                     def helm = docker.image('helmimage:latest')
-                    helm.inside ("-u root") {
-                        withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.0.227:49440') {
-                        script {
-                            for (module in buildList) {
-                                sh "helm upgrade --install ${module} --values deploychart/values/${module}-values.yaml deploychart --set container.image=imax2600/${module}:${date}"
-                            }
-                        }    
-                        // sh 'kubectl config view'
-                        // sh 'helm repo add demo-frontend https://yushiwho.github.io/charts'
-                        // sh 'helm repo update'
-                        // sh 'helm install my-release demo-frontend/demo-frontend --namespace demo-frontend'
-                        // sh 'helm repo remove demo-frontend'
-                        }
-                    }
+                    // helm.inside ("-u root") {
+                    //     withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.0.227:49440') {
+                    //     script {
+                    //         for (module in buildList) {
+                    //             sh "helm upgrade --install ${module} --values deploychart/values/${module}-values.yaml deploychart --set container.image=imax2600/${module}:${date}"
+                    //         }
+                    //     }    
+                    //     // sh 'kubectl config view'
+                    //     // sh 'helm repo add demo-frontend https://yushiwho.github.io/charts'
+                    //     // sh 'helm repo update'
+                    //     // sh 'helm install my-release demo-frontend/demo-frontend --namespace demo-frontend'
+                    //     // sh 'helm repo remove demo-frontend'
+                    //     }
+                    // }
                     // sh 'kubectl apply -f service.yaml'
                     // sh 'kubectl apply -f deployment.yaml'
                     // sh 'kubectl rollout restart deployment test-app'
