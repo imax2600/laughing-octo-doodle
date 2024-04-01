@@ -122,12 +122,12 @@ pipeline {
                     }
                     sh "docker logout "
                 }
-                sh 'docker build -t helmimage:latest -f Dockerfile-helm .'
+                // sh 'docker build -t helmimage:latest -f Dockerfile-helm .'
                 // withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
-                    def helm = docker.image('helmimage:latest')
-                    //def helm = docker.image('okteto/helm-chart-manager:latest')
+                    // def helm = docker.image('helmimage:latest')
+                    def helm = docker.image('okteto/helm-chart-manager:latest')
                     helm.inside ("--entrypoint '' -u root --network helm") {
-                        withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://minikube:8443') {
+                        withKubeConfig( credentialsId: 'testK8s',  serverUrl: 'https://192.168.65.3:6443') {
                         script {
                             for (module in buildList) {
                                 sh "helm upgrade --install ${module} --values deploychart/values/${module}-values.yaml deploychart --set container.image=imax2600/${module}:${date}"
