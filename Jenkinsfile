@@ -156,7 +156,7 @@ pipeline {
      stage('zap scan') {
              steps {
                  script {
-                    sh 'mkdir zap'
+                    // sh 'mkdir zap'
                     sh 'docker run -u root -v zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.1.62:4000 -r zap-report1.html -I'
                     // sh 'docker run -u root -v zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.0.227:3001 -r zap-report2.html -I'
                     // sh 'docker run -u root -v zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.0.227:3002 -r zap-report3.html -I'
